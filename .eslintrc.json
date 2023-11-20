@@ -1,0 +1,145 @@
+{
+  "extends": "next/core-web-vitals",
+  "plugins": [
+    "@typescript-eslint",
+    "import-newlines"
+  ],
+  "rules": {
+    "semi": [
+      "error",
+      "never"
+    ],
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "max-len": [
+      "warn",
+      160
+    ],
+    "no-multi-spaces": [
+      "error"
+    ],
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "curly": [
+      "warn",
+      "all"
+    ],
+    "object-curly-spacing": [
+      "warn",
+      "always"
+    ],
+    "comma-spacing": [
+      "warn",
+      {
+        "after": true
+      }
+    ],
+    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/member-delimiter-style": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "import/no-unresolved": "off",
+    "import/named": "warn",
+    "import/namespace": "warn",
+    "import/no-extraneous-dependencies": [
+      "warn",
+      {
+        "optionalDependencies": false
+      }
+    ],
+    "import/no-named-as-default": "off",
+    "import/export": "warn",
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/newline-after-import": [
+      "warn",
+      {
+        "count": 2
+      }
+    ],
+    "import-newlines/enforce": [
+      "warn",
+      {
+        "semi": false
+      }
+    ],
+    "jsx-quotes": [
+      "warn",
+      "prefer-double"
+    ],
+    "react/jsx-first-prop-new-line": [
+      "warn",
+      "multiline"
+    ],
+    "react/jsx-closing-bracket-location": [
+      "warn",
+      "line-aligned"
+    ],
+    "react/jsx-curly-brace-presence": [
+      "warn"
+    ],
+    "react/jsx-indent-props": [
+      "warn",
+      "first"
+    ],
+    "react/jsx-max-props-per-line": [
+      "warn",
+      {
+        "maximum": {
+          "single": 1,
+          "multi": 1
+        }
+      }
+    ],
+    "react/forbid-prop-types": "warn",
+    "react/no-array-index-key": "warn",
+    "react/jsx-key": "warn",
+    "react/jsx-curly-spacing": [
+      "warn",
+      {
+        "when": "never"
+      }
+    ],
+    "sort-imports": [
+      "warn",
+      {
+        "ignoreDeclarationSort": true
+      }
+    ],
+    "no-html-link-for-pages": "off",
+    "@typescript-eslint/consistent-type-imports": "error"
+  }
+}
