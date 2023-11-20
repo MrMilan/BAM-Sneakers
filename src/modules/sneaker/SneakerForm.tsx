@@ -14,21 +14,14 @@ import type { Sneaker } from '@/types/sneaker.types'
 import { api } from '@/api'
 
 
-const NEW_ITEM_DEFAULT_VALUES: Partial<Sneaker> = {
-    name: undefined,
-    brand: undefined,
-    price: undefined,
-    size: undefined,
-    year: undefined,
-}
-
 type Props = {
+    sneaker: Partial<Sneaker>
+    isEditable: boolean
     onSubmit: ()=> void
 }
 
-const SneakerForm: React.FC<Props> = ({ onSubmit }) => {
-
-    const formContext = useForm<Sneaker>({ defaultValues: NEW_ITEM_DEFAULT_VALUES })
+const SneakerForm: React.FC<Props> = ({ sneaker, isEditable, onSubmit }) => {
+    const formContext = useForm<Sneaker>({ defaultValues: sneaker })
 
     const handleSaveClick = formContext.handleSubmit(async (data) => {
         api.post('/sneakers', data)
@@ -44,32 +37,38 @@ const SneakerForm: React.FC<Props> = ({ onSubmit }) => {
                 <TextInput
                     label="Name"
                     name="name"
+                    disabled={!isEditable}
                     required
                 />
                 <TextInput
                     label="Brand"
                     name="brand"
+                    disabled={!isEditable}
                     required
                 />
                 <TextInput
                     label="Price"
                     name="price"
+                    disabled={!isEditable}
                     required
                 />
                 <NumberInput
                     label="Size US"
                     name="size"
+                    disabled={!isEditable}
                     required
                 />
                 <YearPicker
                     label="Year"
                     name="year"
+                    disabled={!isEditable}
                     required
                 />
                 <Button
                     type="submit"
                     variant="contained"
                     startIcon={<AddIcon/>}
+                    disabled={!isEditable}
                     fullWidth
                 >
                     Add new sneakers

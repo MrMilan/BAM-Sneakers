@@ -5,10 +5,11 @@ import { TextFieldElement, useController } from 'react-hook-form-mui'
 type Props = {
     label: string
     name: string
+    disabled?: boolean
     required?: boolean
 }
 
-const TextInput: React.FC<Props> = ({ label, name, required = false }) => {
+const TextInput: React.FC<Props> = ({ label, name, disabled = false, required = false }) => {
     const { field } = useController({ name })
 
     return (
@@ -17,6 +18,7 @@ const TextInput: React.FC<Props> = ({ label, name, required = false }) => {
             label={label}
             name={name}
             variant="outlined"
+            disabled={disabled}
             required={required}
         />
     )

@@ -13,15 +13,16 @@ import type { Sneaker } from '@/types/sneaker.types'
 
 type Props = {
     sneaker: Sneaker
+    onDeleteClick: (sneaker: Sneaker) => void
 }
 
-const SneakerCard: React.FC<Props> = ({ sneaker }) => (
+const SneakerCard: React.FC<Props> = ({ sneaker, onDeleteClick }) => (
     <Card>
         <CardHeader
             title={sneaker.name}
             subheader={sneaker.brand}
             action={
-                <IconButton onClick={() => {}}>
+                <IconButton onClick={() => onDeleteClick(sneaker)}>
                     <DeleteIcon />
                 </IconButton>
             }

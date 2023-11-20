@@ -4,52 +4,72 @@ import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 
+import type { Sneaker } from '@/types/sneaker.types'
+
 import { SneakerForm } from '@/modules/sneaker/SneakerForm'
 
 
+const NEW_ITEM_DEFAULT_VALUES: Partial<Sneaker> = {
+    name: undefined,
+    brand: undefined,
+    price: undefined,
+    size: undefined,
+    year: undefined,
+}
+
 type Props = {
     isDrawerOpen: boolean
+    sneaker: Sneaker| null
     onSubmit: ()=> void
     onClose: ()=> void
 }
 
-const DrawerEditItem: React.FC<Props> = ({ isDrawerOpen, onSubmit, onClose }) => (
-    <Drawer
-        anchor="right"
-        open={isDrawerOpen}
-        variant="persistent"
-        PaperProps={{
-            sx: {
-                backgroundColor: ({ palette }) => palette.common.white,
-                maxWidth: 524,
-                padding: 3,
-            },
-        }}
-    >
-        <Grid
-            container
+const DrawerEditItem: React.FC<Props> = ({ isDrawerOpen, sneaker, onSubmit, onClose }) => {
+
+    const defaultSneakerValues = sneaker ?? NEW_ITEM_DEFAULT_VALUES
+    const isSneakerEditable = !sneaker
+
+    return (
+        <Drawer
+            anchor="right"
+            open={isDrawerOpen}
+            variant="persistent"
+            PaperProps={{
+                sx: {
+                    backgroundColor: ({ palette }) => palette.common.white,
+                    maxWidth: 524,
+                    padding: 3,
+                },
+            }}
         >
             <Grid
-                item
-                xs={11}
+                container
             >
-                <Typography
-                    variant="h2"
-                    gutterBottom
+                <Grid
+                    item
+                    xs={11}
                 >
-                    Add sneakers to your collection
-                </Typography>
+                    <Typography
+                        variant="h2"
+                        gutterBottom
+                    >
+                        {!sneaker ? 'Add sneakers to your collection' : sneaker.name}
+                    </Typography>
+                </Grid>
+                <Grid
+                    item
+                >
+                    <IconButton onClick={onClose}>
+                        <CloseIcon />
+                    </IconButton>
+                </Grid>
             </Grid>
-            <Grid
-                item
-            >
-                <IconButton onClick={onClose}>
-                    <CloseIcon />
-                </IconButton>
-            </Grid>
-        </Grid>
-        <SneakerForm onSubmit={onSubmit}/>
-    </Drawer>
-)
+            <SneakerForm
+                sneaker={defaultSneakerValues}
+                isEditable={isSneakerEditable}
+                onSubmit={onSubmit}
+            />
+        </Drawer>
+    )}
 
 export { DrawerEditItem }

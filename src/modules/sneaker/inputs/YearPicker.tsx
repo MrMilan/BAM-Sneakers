@@ -8,10 +8,11 @@ import { useController } from 'react-hook-form-mui'
 type Props = {
     label: string
     name: string
+    disabled?: boolean
     required?: boolean
 }
 
-const YearPicker: React.FC<Props> = ({ label, name, required = false }) => {
+const YearPicker: React.FC<Props> = ({ label, name, disabled = false, required = false }) => {
     const { field, fieldState } = useController({
         name,
         rules: {
@@ -38,6 +39,7 @@ const YearPicker: React.FC<Props> = ({ label, name, required = false }) => {
                     },
                 }}
                 onChange={(value: dayjs.Dayjs | null) => field.onChange(value?.format('YYYY'))}
+                disabled={disabled}
             />
         </LocalizationProvider>
     )

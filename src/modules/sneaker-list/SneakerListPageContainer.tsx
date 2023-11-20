@@ -17,6 +17,7 @@ const SneakerListPageContainer: React.FC = () => {
     const [isEditItemOpen, setIsEditItemOpen] = useState(false)
     const [searchValue, setSearchValue] = useState('')
     const [sortKey, setSortKey] = useState<SortKey>('year')
+    const [editedSneaker, setEditedSneaker] = useState<Sneaker | null>(null)
     const { sneakerList } = useSneakerList()
 
     const handleSearchChange = (value: string) => {
@@ -33,10 +34,17 @@ const SneakerListPageContainer: React.FC = () => {
 
     const handleSubmitChange = () => {
         setIsEditItemOpen(false)
+        setEditedSneaker(null)
     }
 
     const handleCloseDrawer = () => {
         setIsEditItemOpen(false)
+        setEditedSneaker(null)
+    }
+
+    const handleDeleteClick = (sneaker: Sneaker) => {
+        setEditedSneaker(sneaker)
+        setIsEditItemOpen(true)
     }
 
     return (
@@ -44,6 +52,7 @@ const SneakerListPageContainer: React.FC = () => {
             rowGap={2}
         >
             <DrawerEditItem
+                sneaker={editedSneaker}
                 isDrawerOpen={isEditItemOpen}
                 onSubmit={handleSubmitChange}
                 onClose={handleCloseDrawer}
@@ -72,6 +81,7 @@ const SneakerListPageContainer: React.FC = () => {
                         <SneakerCard
                             key={sneaker.id}
                             sneaker={sneaker}
+                            onDeleteClick={handleDeleteClick}
                         />
                     ))
                 }
