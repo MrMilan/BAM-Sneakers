@@ -9,14 +9,6 @@ import type { Sneaker } from '@/types/sneaker.types'
 import { SneakerForm } from '@/modules/sneaker/SneakerForm'
 
 
-const NEW_ITEM_DEFAULT_VALUES: Partial<Sneaker> = {
-    name: undefined,
-    brand: undefined,
-    price: undefined,
-    size: undefined,
-    year: undefined,
-}
-
 type Props = {
     isDrawerOpen: boolean
     sneaker: Sneaker| null
@@ -26,7 +18,7 @@ type Props = {
 
 const DrawerEditItem: React.FC<Props> = ({ isDrawerOpen, sneaker, onSubmit, onClose }) => {
 
-    const defaultSneakerValues = sneaker ?? NEW_ITEM_DEFAULT_VALUES
+    const defaultSneakerValues = sneaker
     const isSneakerEditable = !sneaker
 
     return (

@@ -29,6 +29,7 @@ const SneakerListPageContainer: React.FC = () => {
     }
 
     const handleAddItem = () => {
+        setEditedSneaker(null)
         setIsEditItemOpen(true)
     }
 

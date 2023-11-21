@@ -1,6 +1,7 @@
 'use client'
 import AddIcon from '@mui/icons-material/Add'
 import Button from '@mui/material/Button'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { FormContainer } from 'react-hook-form-mui'
 
@@ -14,14 +15,30 @@ import type { Sneaker } from '@/types/sneaker.types'
 import { api } from '@/api'
 
 
+const NEW_ITEM_DEFAULT_VALUES: Partial<Sneaker> = {
+    name: undefined,
+    brand: undefined,
+    price: undefined,
+    size: undefined,
+    year: undefined,
+}
+
 type Props = {
-    sneaker: Partial<Sneaker>
+    sneaker: Sneaker | null
     isEditable: boolean
-    onSubmit: ()=> void
+    onSubmit: () => void
 }
 
 const SneakerForm: React.FC<Props> = ({ sneaker, isEditable, onSubmit }) => {
-    const formContext = useForm<Sneaker>({ defaultValues: sneaker })
+    const formContext = useForm<Sneaker>()
+
+    useEffect(() => {
+        if (sneaker) {
+            formContext.reset(sneaker)
+        } else {
+            formContext.reset(NEW_ITEM_DEFAULT_VALUES)
+        }
+    }, [formContext, sneaker])
 
     const handleSaveClick = formContext.handleSubmit(async (data) => {
         api.post('/sneakers', data)
@@ -67,7 +84,7 @@ const SneakerForm: React.FC<Props> = ({ sneaker, isEditable, onSubmit }) => {
                 <Button
                     type="submit"
                     variant="contained"
-                    startIcon={<AddIcon/>}
+                    startIcon={<AddIcon />}
                     disabled={!isEditable}
                     fullWidth
                 >
