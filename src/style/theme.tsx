@@ -18,7 +18,7 @@ const theme = createTheme({
             disabled: common.black,
         },
         background: {
-            default: common.white,
+            default: '#eeeff0',
         },
         divider: '#e4e4e4',
     },

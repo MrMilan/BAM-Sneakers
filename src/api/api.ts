@@ -1,5 +1,5 @@
 
-const API_URL = 'https://crudcrud.com/api/5fc18ea0c0d548c48c3dc9a5e6ab22fb'
+const API_URL = 'https://crudcrud.com/api/d3724050ec7c44c18ff0a4ad77f4526a'
 
 const getRequestUrl = (path: string) => `${API_URL}${path}`
 

@@ -1,32 +1,31 @@
 'use client'
-import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { useState } from 'react'
 
 import { ActionToolbar } from './actionToolbar/ActionToolbar'
-import { SneakerCard } from './card/SneakerCard'
 import { useSneakerList } from './data/useSneakerList'
 import { DrawerEditItem } from './DrawerEditItem'
 import { FilterBar } from './filterBar/FilterBar'
+import { useFilteredSneakerList } from './filterBar/useFilteredSneakerList'
+import { Loading } from './Loading'
+import { NoDataBoxes } from './noData/NoDataBoxes'
+import { SneakerList } from './SneakerList'
 
-import type { SortKey } from './filterBar/types'
+import type { SortKey } from './filterBar/filter.types'
 import type { Sneaker } from '@/types/sneaker.types'
 
 
 const SneakerListPageContainer: React.FC = () => {
     const [isEditItemOpen, setIsEditItemOpen] = useState(false)
-    const [searchValue, setSearchValue] = useState('')
-    const [sortKey, setSortKey] = useState<SortKey>('year')
     const [editedSneaker, setEditedSneaker] = useState<Sneaker | null>(null)
-    const { sneakerList } = useSneakerList()
+    const { isLoading, sneakerList } = useSneakerList()
+    const [reducerState, dispatchFilter] = useFilteredSneakerList(sneakerList)
 
-    const handleSearchChange = (value: string) => {
-        setSearchValue(value)
-    }
+    const handleSearchChange = (value: string) =>
+        dispatchFilter({ type: 'UPDATE_FILTERS', payload: { filters: { ...reducerState.filters, name: value } } })
 
-    const handleSortKeyChange = (value: SortKey) => {
-        setSortKey(value)
-    }
+    const handleSortKeyChange = (value: SortKey) =>
+        dispatchFilter({ type: 'UPDATE_FILTERS', payload: { filters: { ...reducerState.filters, sortKey: value } } })
 
     const handleAddItem = () => {
         setEditedSneaker(null)
@@ -59,34 +58,32 @@ const SneakerListPageContainer: React.FC = () => {
                 onClose={handleCloseDrawer}
             />
             <ActionToolbar
-                searchValue={searchValue}
+                searchValue={reducerState.filters.name}
                 onAddNewSneakerClick={handleAddItem}
                 onSearchChange={handleSearchChange}
             />
             <FilterBar
-                filterString=""
+                filterString={reducerState.filters.name}
                 filteredItemCount={0}
-                sortKey={sortKey}
+                sortKey={reducerState.filters.sortKey}
                 onSortKeyChange={handleSortKeyChange}
             />
-            <Box
-                sx={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr 1fr',
-                    alignItems: 'center',
-                    columnGap: 2,
-                }}
-            >
-                {
-                    sneakerList.map(sneaker => (
-                        <SneakerCard
-                            key={sneaker._id}
-                            sneaker={sneaker}
-                            onDeleteClick={handleDeleteClick}
-                        />
-                    ))
-                }
-            </Box>
+            {
+                isLoading ?
+                    (
+                        <Loading />
+                    )
+                    :
+                    (
+                        <>
+                            <SneakerList
+                                filteredSneakerList={sneakerList}
+                                onDeleteClick={handleDeleteClick}
+                            />
+                            <NoDataBoxes reducerState={reducerState} />
+                        </>
+                    )
+            }
         </Stack>
     )
 }
