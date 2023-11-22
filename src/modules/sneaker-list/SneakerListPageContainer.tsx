@@ -1,6 +1,6 @@
 'use client'
 import Stack from '@mui/material/Stack'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ActionToolbar } from './actionToolbar/ActionToolbar'
 import { useSneakerList } from './data/useSneakerList'
@@ -19,13 +19,20 @@ const SneakerListPageContainer: React.FC = () => {
     const [isEditItemOpen, setIsEditItemOpen] = useState(false)
     const [editedSneaker, setEditedSneaker] = useState<Sneaker | null>(null)
     const { isLoading, sneakerList } = useSneakerList()
-    const [reducerState, dispatchFilter] = useFilteredSneakerList(sneakerList)
+    const [reducerState, dispatchFilter] = useFilteredSneakerList()
+
+    useEffect(() => {
+        if (!isLoading) {
+            dispatchFilter({ type: 'INIT', payload: { filters: reducerState.filters, sneakerList } })
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading])
 
     const handleSearchChange = (value: string) =>
-        dispatchFilter({ type: 'UPDATE_FILTERS', payload: { filters: { ...reducerState.filters, name: value } } })
+        dispatchFilter({ type: 'UPDATE_FILTERS', payload: { filters: { ...reducerState.filters, name: value }, sneakerList } })
 
     const handleSortKeyChange = (value: SortKey) =>
-        dispatchFilter({ type: 'UPDATE_FILTERS', payload: { filters: { ...reducerState.filters, sortKey: value } } })
+        dispatchFilter({ type: 'UPDATE_FILTERS', payload: { filters: { ...reducerState.filters, sortKey: value }, sneakerList } })
 
     const handleAddItem = () => {
         setEditedSneaker(null)
@@ -77,7 +84,7 @@ const SneakerListPageContainer: React.FC = () => {
                     (
                         <>
                             <SneakerList
-                                filteredSneakerList={sneakerList}
+                                filteredSneakerList={reducerState.filteredSneakerList}
                                 onDeleteClick={handleDeleteClick}
                             />
                             <NoDataBoxes reducerState={reducerState} />

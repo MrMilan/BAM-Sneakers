@@ -14,11 +14,12 @@ type FilterState = {
     filters: SneakerFilter
 }
 
-type FilterActionTypes = 'UPDATE_FILTERS'
+type FilterActionTypes = 'INIT' | 'UPDATE_FILTERS'
 
 type FilterActions = {
     type: FilterActionTypes,
     payload: {
+        sneakerList: Sneaker[],
         filters: SneakerFilter
     }
 }
