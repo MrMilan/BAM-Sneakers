@@ -1,5 +1,5 @@
 type Sneaker = {
-    id: string
+    _id: string
     name: string
     brand: string
     price: number

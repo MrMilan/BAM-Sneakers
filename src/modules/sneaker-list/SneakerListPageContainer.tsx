@@ -7,9 +7,9 @@ import { ActionToolbar } from './actionToolbar/ActionToolbar'
 import { SneakerCard } from './card/SneakerCard'
 import { useSneakerList } from './data/useSneakerList'
 import { DrawerEditItem } from './DrawerEditItem'
-import { FilterBar } from './FilterBar/FilterBar'
+import { FilterBar } from './filterBar/FilterBar'
 
-import type { SortKey } from './FilterBar/types'
+import type { SortKey } from './filterBar/types'
 import type { Sneaker } from '@/types/sneaker.types'
 
 
@@ -80,7 +80,7 @@ const SneakerListPageContainer: React.FC = () => {
                 {
                     sneakerList.map(sneaker => (
                         <SneakerCard
-                            key={sneaker.id}
+                            key={sneaker._id}
                             sneaker={sneaker}
                             onDeleteClick={handleDeleteClick}
                         />

@@ -1,4 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close'
+import DeleteIcon from '@mui/icons-material/Delete'
+import Button from '@mui/material/Button'
 import Drawer from '@mui/material/Drawer'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
@@ -6,20 +8,26 @@ import Typography from '@mui/material/Typography'
 
 import type { Sneaker } from '@/types/sneaker.types'
 
+import { api } from '@/api'
 import { SneakerForm } from '@/modules/sneaker/SneakerForm'
 
 
 type Props = {
     isDrawerOpen: boolean
-    sneaker: Sneaker| null
-    onSubmit: ()=> void
-    onClose: ()=> void
+    sneaker: Sneaker | null
+    onSubmit: () => void
+    onClose: () => void
 }
 
 const DrawerEditItem: React.FC<Props> = ({ isDrawerOpen, sneaker, onSubmit, onClose }) => {
 
     const defaultSneakerValues = sneaker
     const isSneakerEditable = !sneaker
+
+    const handleDeleteClick = async (id: string) => {
+        api.delete('/sneakers', id)
+        onClose()
+    }
 
     return (
         <Drawer
@@ -29,6 +37,7 @@ const DrawerEditItem: React.FC<Props> = ({ isDrawerOpen, sneaker, onSubmit, onCl
             PaperProps={{
                 sx: {
                     backgroundColor: ({ palette }) => palette.common.white,
+                    minWidth: 500,
                     maxWidth: 524,
                     padding: 3,
                 },
@@ -61,7 +70,19 @@ const DrawerEditItem: React.FC<Props> = ({ isDrawerOpen, sneaker, onSubmit, onCl
                 isEditable={isSneakerEditable}
                 onSubmit={onSubmit}
             />
+            {!isSneakerEditable && (
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<DeleteIcon />}
+                    fullWidth
+                    onClick={() => handleDeleteClick(sneaker._id)}
+                >
+                    Delete
+                </Button>
+            )}
         </Drawer>
-    )}
+    )
+}
 
 export { DrawerEditItem }
