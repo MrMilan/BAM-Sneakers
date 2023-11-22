@@ -7,9 +7,9 @@ import { SearchInput } from './SearchInput'
 
 
 type Props = {
-  searchValue: string
-  onSearchChange: (searchString: string) => void
-  onAddNewSneakerClick: () => void
+    searchValue: string
+    onSearchChange: (searchString: string) => void
+    onAddNewSneakerClick: () => void
 }
 
 const ActionToolbar: React.FC<Props> = ({ searchValue, onSearchChange, onAddNewSneakerClick }) => {
@@ -22,7 +22,7 @@ const ActionToolbar: React.FC<Props> = ({ searchValue, onSearchChange, onAddNewS
                 xs={6}
             >
                 <Typography variant="h1">
-                  Your collection
+                    Your collection
                 </Typography>
             </Grid>
             <Grid
@@ -44,7 +44,7 @@ const ActionToolbar: React.FC<Props> = ({ searchValue, onSearchChange, onAddNewS
                     variant="contained"
                     onClick={onAddNewSneakerClick}
                 >
-                  Add new sneakers
+                    Add new sneakers
                 </Button>
             </Grid>
         </Grid>

@@ -16,16 +16,17 @@ import type { Sneaker } from '@/types/sneaker.types'
 
 
 const SneakerListPageContainer: React.FC = () => {
+    const { isLoading, sneakerList } = useSneakerList()
+
     const [isEditItemOpen, setIsEditItemOpen] = useState(false)
     const [editedSneaker, setEditedSneaker] = useState<Sneaker | null>(null)
-    const { isLoading, sneakerList } = useSneakerList()
     const [reducerState, dispatchFilter] = useFilteredSneakerList()
 
     useEffect(() => {
         if (!isLoading) {
             dispatchFilter({ type: 'INIT', payload: { filters: reducerState.filters, sneakerList } })
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading])
 
     const handleSearchChange = (value: string) =>

@@ -5,9 +5,7 @@ import { getSneakerList } from './getSneakerList'
 import type { Sneaker } from '@/types/sneaker.types'
 
 
-
-
-const useSneakerList= () => {
+const useSneakerList = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [sneakerList, setShopList] = useState<Sneaker[]>([])
 

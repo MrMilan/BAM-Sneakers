@@ -17,7 +17,7 @@ const YearPicker: React.FC<Props> = ({ label, name, disabled = false, required =
         name,
         rules: {
             validate: (value) => {
-                if(!required) {
+                if (!required) {
                     return undefined
                 }
                 return !value ? 'This field is required' : undefined
@@ -28,7 +28,7 @@ const YearPicker: React.FC<Props> = ({ label, name, disabled = false, required =
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateTimePicker
-                label={required ? `${label} *`: label}
+                label={required ? `${label} *` : label}
                 inputRef={field.ref}
                 views={['year']}
                 value={field.value ? dayjs(field.value) : null}

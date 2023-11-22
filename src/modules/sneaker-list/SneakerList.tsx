@@ -24,7 +24,7 @@ const SneakerList: React.FC<Props> = ({ filteredSneakerList, onDeleteClick }) =>
         {
             filteredSneakerList.map(sneaker => (
                 <SneakerCard
-                    key={sneaker.id}
+                    key={sneaker._id}
                     sneaker={sneaker}
                     onDeleteClick={onDeleteClick}
                 />
