@@ -1,5 +1,5 @@
 'use client'
-import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs'
 import { useController } from 'react-hook-form-mui'
@@ -27,7 +27,7 @@ const YearPicker: React.FC<Props> = ({ label, name, disabled = false, required =
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateTimePicker
+            <DatePicker
                 label={required ? `${label} *` : label}
                 inputRef={field.ref}
                 views={['year']}

@@ -16,17 +16,18 @@ type Props = {
     isDrawerOpen: boolean
     sneaker: Sneaker | null
     onSubmit: () => void
+    onDelete: () => void
     onClose: () => void
 }
 
-const DrawerEditItem: React.FC<Props> = ({ isDrawerOpen, sneaker, onSubmit, onClose }) => {
+const DrawerEditItem: React.FC<Props> = ({ isDrawerOpen, sneaker, onSubmit, onDelete, onClose }) => {
 
     const defaultSneakerValues = sneaker
     const isSneakerEditable = !sneaker
 
     const handleDeleteClick = async (id: string) => {
-        api.delete('/sneakers', id)
-        onClose()
+        await api.delete('/sneakers', id)
+        onDelete()
     }
 
     return (

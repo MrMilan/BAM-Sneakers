@@ -19,6 +19,7 @@ const SneakerList: React.FC<Props> = ({ filteredSneakerList, onDeleteClick }) =>
             gridTemplateColumns: '1fr 1fr 1fr',
             alignItems: 'center',
             columnGap: 2,
+            rowGap: 2,
         }}
     >
         {

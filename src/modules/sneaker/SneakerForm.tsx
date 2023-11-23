@@ -41,7 +41,7 @@ const SneakerForm: React.FC<Props> = ({ sneaker, isEditable, onSubmit }) => {
     }, [formContext, sneaker])
 
     const handleSaveClick = formContext.handleSubmit(async (data) => {
-        api.post('/sneakers', data)
+        await api.post('/sneakers', data)
         onSubmit()
     })
 

@@ -16,7 +16,7 @@ import type { Sneaker } from '@/types/sneaker.types'
 
 
 const SneakerListPageContainer: React.FC = () => {
-    const { isLoading, sneakerList } = useSneakerList()
+    const { isLoading, refresh, sneakerList } = useSneakerList()
 
     const [isEditItemOpen, setIsEditItemOpen] = useState(false)
     const [editedSneaker, setEditedSneaker] = useState<Sneaker | null>(null)
@@ -35,24 +35,28 @@ const SneakerListPageContainer: React.FC = () => {
     const handleSortKeyChange = (value: SortKey) =>
         dispatchFilter({ type: 'UPDATE_FILTERS', payload: { filters: { ...reducerState.filters, sortKey: value }, sneakerList } })
 
-    const handleAddItem = () => {
+    const handleCloseDrawer = () => {
+        setIsEditItemOpen(false)
+    }
+
+    const handleAddNewSneakerClick = () => {
         setEditedSneaker(null)
         setIsEditItemOpen(true)
     }
 
-    const handleSubmitChange = () => {
-        setIsEditItemOpen(false)
-        setEditedSneaker(null)
-    }
-
-    const handleCloseDrawer = () => {
-        setIsEditItemOpen(false)
-        setEditedSneaker(null)
+    const handleAddSneakerSubmitChange = async () => {
+        handleCloseDrawer()
+        await refresh()
     }
 
     const handleDeleteClick = (sneaker: Sneaker) => {
         setEditedSneaker(sneaker)
         setIsEditItemOpen(true)
+    }
+
+    const handleDeleteSubmitChange = async () => {
+        handleCloseDrawer()
+        await refresh()
     }
 
     return (
@@ -62,12 +66,13 @@ const SneakerListPageContainer: React.FC = () => {
             <DrawerEditItem
                 sneaker={editedSneaker}
                 isDrawerOpen={isEditItemOpen}
-                onSubmit={handleSubmitChange}
+                onSubmit={handleAddSneakerSubmitChange}
                 onClose={handleCloseDrawer}
+                onDelete={handleDeleteSubmitChange}
             />
             <ActionToolbar
                 searchValue={reducerState.filters.name}
-                onAddNewSneakerClick={handleAddItem}
+                onAddNewSneakerClick={handleAddNewSneakerClick}
                 onSearchChange={handleSearchChange}
             />
             <FilterBar
