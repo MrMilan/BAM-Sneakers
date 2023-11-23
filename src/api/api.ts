@@ -80,7 +80,7 @@ const postForm = async (path: string, variables: Record<string, unknown>) => {
     }
 }
 
-const deleteApi = async (path: string, accessToken: string | null) => {
+const apiDelete = async (path: string, accessToken: string | null) => {
     try {
         const requestUrl = getRequestUrl(path)
         const config: RequestInit = {
@@ -102,4 +102,4 @@ const deleteApi = async (path: string, accessToken: string | null) => {
     }
 }
 
-export { get, post, postForm, deleteApi }
+export { get, post, postForm, apiDelete }
