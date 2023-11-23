@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography'
 
 import { SortButton } from './SortButton'
 
-import type { SortKey } from './filter.types'
+import type { SortKey } from '../filter.types'
 
 
 type Props = {

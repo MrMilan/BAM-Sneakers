@@ -1,6 +1,6 @@
 import { NoDataBox } from './NoDataBox'
 
-import type { FilterState } from '../filterBar/filter.types'
+import type { FilterState } from '../filter.types'
 
 
 type Props = {

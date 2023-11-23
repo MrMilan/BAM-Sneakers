@@ -5,13 +5,13 @@ import { useEffect, useState } from 'react'
 import { ActionToolbar } from './actionToolbar/ActionToolbar'
 import { useSneakerList } from './data/useSneakerList'
 import { DrawerEditItem } from './DrawerEditItem'
-import { FilterBar } from './filterBar/FilterBar'
-import { useFilteredSneakerList } from './filterBar/useFilteredSneakerList'
+import { FilterBar } from './filterBarA/FilterBar'
 import { Loading } from './Loading'
 import { NoDataBoxes } from './noData/NoDataBoxes'
 import { SneakerList } from './SneakerList'
+import { useFilteredSneakerList } from './useFilteredSneakerList/useFilteredSneakerList'
 
-import type { SortKey } from './filterBar/filter.types'
+import type { SortKey } from './filter.types'
 import type { Sneaker } from '@/types/sneaker.types'
 
 
