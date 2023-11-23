@@ -1,8 +1,21 @@
 import common from '@mui/material/colors/common'
 import { createTheme } from '@mui/material/styles'
 
+import { Boxing, Excon } from '@/app/fonts/customFonts'
+
 
 const theme = createTheme({
+    typography: {
+        fontFamily: Excon.style.fontFamily,
+        h1: {
+            fontFamily: Boxing.style.fontFamily,
+            fontSize: 64,
+        },
+        h2: {
+            fontFamily: Boxing.style.fontFamily,
+            fontSize: 36,
+        },
+    },
     palette: {
         primary: {
             main: '#191919',

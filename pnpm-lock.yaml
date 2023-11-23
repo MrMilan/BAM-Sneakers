@@ -23,6 +23,9 @@ dependencies:
   '@mui/x-date-pickers':
     specifier: ^6.18.1
     version: 6.18.1(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/material@5.14.15)(@mui/system@5.14.18)(@types/react@18.2.38)(dayjs@1.11.10)(react-dom@18.0.0)(react@18.0.0)
+  '@next/font':
+    specifier: ^14.0.3
+    version: 14.0.3(next@13.5.6)
   dayjs:
     specifier: ^1.11.10
     version: 1.11.10
@@ -584,6 +587,14 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
+
+  /@next/font@14.0.3(next@13.5.6):
+    resolution: {integrity: sha512-M96skA6j99ri/J9+BpoDOoO9ntadHUyX2CmwSzsLDm3fL3hgyPfskH6Kd92sz6H8cr7ZHV3xNkCTggFvnLdq2Q==}
+    peerDependencies:
+      next: '*'
+    dependencies:
+      next: 13.5.6(react-dom@18.0.0)(react@18.0.0)
+    dev: false
 
   /@next/swc-darwin-arm64@13.5.6:
     resolution: {integrity: sha512-5nvXMzKtZfvcu4BhtV0KH1oGv4XEW+B+jOfmBdpFI3C7FrB/MfujRpWYSBBO64+qbW8pkZiSyQv9eiwnn5VIQA==}
