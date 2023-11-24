@@ -42,6 +42,7 @@ const SneakerForm: React.FC<Props> = ({ sneaker, isEditable, onSubmit }) => {
 
     const handleSaveClick = formContext.handleSubmit(async (data) => {
         await api.post('/sneakers', data)
+        formContext.reset(NEW_ITEM_DEFAULT_VALUES)
         onSubmit()
     })
 
