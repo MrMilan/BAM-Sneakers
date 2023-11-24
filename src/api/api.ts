@@ -1,5 +1,4 @@
-
-const API_URL = 'https://crudcrud.com/api/d3724050ec7c44c18ff0a4ad77f4526a'
+const API_URL = process.env['API_URL']
 
 const getRequestUrl = (path: string) => `${API_URL}${path}`
 
