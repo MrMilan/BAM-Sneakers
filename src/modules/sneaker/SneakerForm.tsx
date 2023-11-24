@@ -41,7 +41,11 @@ const SneakerForm: React.FC<Props> = ({ sneaker, isEditable, onSubmit }) => {
     }, [formContext, sneaker])
 
     const handleSaveClick = formContext.handleSubmit(async (data) => {
-        await api.post('/sneakers', data)
+        const parsedData = {
+            ...data,
+            year: parseInt(data.year.toString()),
+        } satisfies Sneaker
+        await api.post('/sneakers', parsedData)
         formContext.reset(NEW_ITEM_DEFAULT_VALUES)
         onSubmit()
     })
@@ -64,10 +68,13 @@ const SneakerForm: React.FC<Props> = ({ sneaker, isEditable, onSubmit }) => {
                     disabled={!isEditable}
                     required
                 />
-                <TextInput
+                <NumberInput
                     label="Price"
                     name="price"
                     disabled={!isEditable}
+                    disableArrows
+                    min={0}
+                    max={9999}
                     required
                 />
                 <NumberInput

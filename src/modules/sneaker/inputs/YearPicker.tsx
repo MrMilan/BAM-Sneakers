@@ -25,6 +25,9 @@ const YearPicker: React.FC<Props> = ({ label, name, disabled = false, required =
         },
     })
 
+    const handleChange = (value: dayjs.Dayjs | null) =>
+        field.onChange(value?.format('YYYY'))
+
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
@@ -38,7 +41,7 @@ const YearPicker: React.FC<Props> = ({ label, name, disabled = false, required =
                         helperText: fieldState.error?.message,
                     },
                 }}
-                onChange={(value: dayjs.Dayjs | null) => field.onChange(value?.format('YYYY'))}
+                onChange={handleChange}
                 disabled={disabled}
             />
         </LocalizationProvider>
