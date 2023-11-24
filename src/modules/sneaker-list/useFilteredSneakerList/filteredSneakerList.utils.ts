@@ -10,12 +10,11 @@ const sneakerComparator = (sortKey: SortKey) => (sneakerA: Sneaker, sneakerB: Sn
     const innerSortKey: keyof Sneaker = sortKey
     const valueA = sneakerA[innerSortKey]
     const valueB = sneakerB[innerSortKey]
-    const ascDescByKey = sortKey === 'year' ? 1 : -1
     if (valueA < valueB) {
-        return -1 * ascDescByKey
+        return -1
     }
     if (valueA > valueB) {
-        return 1 * ascDescByKey
+        return 1
     }
     return 0
 }
